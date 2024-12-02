@@ -48,4 +48,22 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 tfidf = TfidfVectorizer(stop_words=stop, tokenizer=tokenizer_porter)
 X_train = tfidf.fit_transform(X_train).toarray() 
 
-X_test = tfidf.fit_transform(X_test).toarray() 
+X_test = tfidf.fit_transform(X_test).toarray()  
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV, cross_val_score
+
+rfgs = GridSearchCV(estimator=RandomForestClassifier(random_state=1),
+                  param_grid=[{'max_depth': [5, 6, 7],
+                         'n_estimators': [100, 200]}],
+                  scoring='accuracy',
+                  cv=5)  
+
+rfgs.fit(X_train, y_train)
+print(rfgs.best_score_)
+print(rfgs.best_params_)
+
+
+rfgsb = rfgs.best_estimator_
+rfgsb.fit(X_train, y_train)
+print(rfgsb.score(X_test, y_test))
