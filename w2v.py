@@ -24,7 +24,7 @@ A = [word_tokenize(X[i]) for i in range(X.shape[0])]
 
 from gensim.models import Word2Vec
 
-# 訓練 Word2Vec 模型，使用 Skip-gram 方法
+#  Word2Vec 
 model = Word2Vec(A, vector_size=100, window=5, min_count=1, sg=1)
 
 import numpy as np
