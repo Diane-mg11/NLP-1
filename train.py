@@ -49,3 +49,10 @@ tfidf = TfidfVectorizer(stop_words=stop, tokenizer=tokenizer_porter)
 X_train = tfidf.fit_transform(X_train).toarray() 
 
 X_test = tfidf.fit_transform(X_test).toarray() 
+
+# logistic regression
+from sklearn.linear_model import LogisticRegression
+
+lr = LogisticRegression()
+lr.fit(X_train, y_train)
+lr.score(X_test, y_test) 
